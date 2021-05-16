@@ -1,0 +1,133 @@
+body {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: aliceblue; */
+  font-size: 75px;
+  perspective: 8em;
+  perspective-origin: 50% calc(50% - 2.5em);
+}
+.screen {
+  position: relative;
+  transform-style: preserve-3d;
+  animation: screenRotate 30s infinite linear;
+}
+.ball {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: lightblue;
+  position: absolute;
+  left: -0.5em;
+  bottom: 1em;
+  background-image: radial-gradient(circle at top, lightblue, 30%, #111);
+  animation: ballBounce 1.2s infinite ease-out,
+    screenRotate 30s infinite linear reverse;
+}
+.ballShadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(#0009, #0000 50%);
+  animation: ballShadow 1.2s infinite ease-out;
+}
+.cube {
+  width: 2em;
+  height: 2em;
+  transform-style: preserve-3d;
+  position: absolute;
+  bottom: -1em;
+  left: -1em;
+  animation: cubeHeight 1.2s infinite linear;
+}
+.cube .left,
+.cube .right,
+.cube .front,
+.cube .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #49e9;
+  box-shadow: 0 0 1em #000 inset;
+}
+.cube .front {
+  transform: translateZ(1em);
+}
+.cube .right {
+  transform: rotateY(90deg) translateZ(1em);
+}
+.cube .back {
+  transform: rotateY(180deg) translateZ(1em);
+}
+.cube .left {
+  transform: rotateY(270deg) translateZ(1em);
+}
+.cube .top {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: #49e9;
+  box-shadow: 0 0 0.5em #000 inset;
+  transform: translateY(-50%) rotateX(90deg);
+}
+.cube .bottom {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  background: #fff;
+  bottom: 0;
+  box-shadow: 0 0 0.9em #000 inset;
+  transform: translateY(50%) rotateX(90deg);
+}
+.floor {
+  width: 15em;
+  height: 15em;
+  position: absolute;
+  background-image: radial-gradient(#0000, #000),
+    repeating-conic-gradient(from 45deg, #111 0deg 90deg, #222 90deg 180deg);
+  background-size: 100%, 1em 1em;
+  transform: translate(-50%, -50%) rotateX(90deg);
+  top: 1em;
+}
+
+@keyframes screenRotate {
+  to {
+    transform: rotateY(360deg);
+  }
+}
+@keyframes ballBounce {
+  0%,
+  100% {
+    bottom: 0.6em;
+  }
+  50% {
+    bottom: 2.5em;
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes ballShadow {
+  0%,
+  10%,
+  93.5%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0.5;
+    animation-timing-function: ease-in;
+  }
+}
+@keyframes cubeHeight {
+  0%,
+  100% {
+    height: 1.5em;
+  }
+  9%,
+  93.5% {
+    height: 2em;
+  }
+}
